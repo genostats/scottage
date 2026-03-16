@@ -17,7 +17,7 @@ my.score.test <- function(null.model, X) {
   n <- length(start)
 
   if(length(X) != n) stop("length(X) is not ok")
-
+  X <- ifelse( is.na(X), mean(X, na.rm = TRUE), X)
   # -------------------------------------------------------------------------------------
   # Calcul de la composante du score p/r à X
   # On a besoin de la dérivée p/r à gamma [le coefficient de X, qui est pris à 0
