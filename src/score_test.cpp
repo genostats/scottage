@@ -10,7 +10,9 @@ scalar_t score_test(Rcpp::XPtr<nullObject<scalar_t>> nm, Rcpp::NumericVector X) 
   int nb_cluster = nm->W.cols();
 
   if(X.size() != n) Rcpp::stop("length(X) is not ok");
-
+  
+  X = Rcpp::ifelse(Rcpp::is_na(X), Rcpp::mean(Rcpp::na_omit(X)), X);
+  
   std::vector<scalar_t> S1_gamma(m, 0);
   for(int jk = 0; jk < n; jk++) {
     for(int z : nm->L_times[jk]) S1_gamma[z - 0] += X[jk] * nm->exp_beta_Z[jk];  // MINUS 1
