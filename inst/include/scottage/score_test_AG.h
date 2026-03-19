@@ -6,7 +6,7 @@
 #define _scottage_core_test_AG_
 
 template<typename scalar_t, typename vector>
-scalar_t score_test_AG(Rcpp::XPtr<nullObject<scalar_t>> nm, vector & X, scalar_t mean_X = std::numeric_limits<scalar_t>::quiet_NaN()) {
+scalar_t score_test_AG(nullObject<scalar_t> * nm, vector & X, scalar_t mean_X = std::numeric_limits<scalar_t>::quiet_NaN()) {
   int m = nm->T.size();
   int n = nm->start.size();
   int nb_cluster = nm->W.cols();

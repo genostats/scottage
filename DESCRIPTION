@@ -10,5 +10,5 @@ License: CeCILL-2
 Encoding: UTF-8
 Depends: survival
 Imports: Rcpp (>= 1.1.0)
-LinkingTo: Rcpp, RcppEigen, milorGWAS
+LinkingTo: Rcpp, RcppEigen, milorGWAS, gaston
 RoxygenNote: 7.3.2
