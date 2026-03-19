@@ -25,6 +25,14 @@ nm3 <- null.model(formula, data)
 s3 <- score.test(nm3, data$tt)
 stopifnot( abs(s0 - s1) < 1e-5 )
 
+# ---- un test avec des valeurs manquantes dans tt ----
+
+X <- data$tt
+X[1:5] <- NA
+s0.na <- my.score.test(nm0, X)
+s1.na <- score.test(nm1, X)
+stopifnot( abs(s0.na - s1.na) < 1e-6 )
+
 # -------------------------------------------
 
 formula2 <- Surv(start, stop, etat) ~ covar + covar2 + cluster(id) 
