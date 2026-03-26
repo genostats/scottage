@@ -1,7 +1,5 @@
 #include <Rcpp.h>
-#include "milorGWAS/snp_filler_bed.h"
-#include "milorGWAS/snp_filler_001_bed.h"
-#include "milorGWAS/snp_filler_011_bed.h"
+#include "snp_filler_with_repeats_bed.h"
 #include "gwas_score_test_AG.h"
 
 // using namespace Rcpp;
@@ -15,18 +13,14 @@ inline List GWAS_score_test_AG_bed(Rcpp::XPtr<nullObject<typename filler::type>>
 
 
 //[[Rcpp::export]]
-List GWAS_score_test_AG_bed_float(XPtr<matrix4> pA, NumericVector p, int beg, int end, Rcpp::XPtr<nullObject<float>> nm, std::string coding) {
-  if(coding == "012") {
-    snp_filler_additive_bed<float> S(pA, p, beg, end);
-    return GWAS_score_test_AG_bed(nm, S);
-  } else if(coding == "011") {
-    snp_filler_011_bed<float> S(pA, p, beg, end);
-    return GWAS_score_test_AG_bed(nm, S);
-  } else if(coding == "001") {
-    snp_filler_001_bed<float> S(pA, p, beg, end);
-    return GWAS_score_test_AG_bed(nm, S);
-  } else {
-    stop("Unknown coding value");
-  }
+List GWAS_score_test_AG_bed_float(XPtr<matrix4> pA, NumericVector p, IntegerVector times, int beg, int end, Rcpp::XPtr<nullObject<float>> nm) {
+  snp_filler_with_repeats_bed<float> S(pA, p, times, beg, end);
+  return GWAS_score_test_AG_bed(nm, S);
+}
+
+//[[Rcpp::export]]
+List GWAS_score_test_AG_bed_double(XPtr<matrix4> pA, NumericVector p, IntegerVector times, int beg, int end, Rcpp::XPtr<nullObject<double>> nm) {
+  snp_filler_with_repeats_bed<double> S(pA, p, times, beg, end);
+  return GWAS_score_test_AG_bed(nm, S);
 }
 

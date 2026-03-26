@@ -8,7 +8,7 @@ Authors@R: person("Your", "Name", role = c("aut", "cre"), email =
 Description: More about what it does (maybe more than one line).
 License: CeCILL-2
 Encoding: UTF-8
-Depends: survival
+Depends: survival, gaston
 Imports: Rcpp (>= 1.1.0)
 LinkingTo: Rcpp, RcppEigen, milorGWAS, gaston
 RoxygenNote: 7.3.2

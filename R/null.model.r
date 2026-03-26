@@ -21,8 +21,12 @@ null.model <- function(formula, data) {
     id <- 1:nrow(data)   
   }
   id <- as.factor(id)
-  
-  
+ 
+  # est-ce que les facteurs sont bien regroupes ?
+  if(nlevels(id) != length(rle(as.integer(id))$length)) {
+    warning("All events related to an individual should be in contiguous lines")
+  }
+
   Terms <- terms(formula, specials = "cluster", data = data)
   tcl <- attr(Terms, "specials")$cluster
   

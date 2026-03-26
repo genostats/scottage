@@ -3,7 +3,7 @@
 #' @description S4 class etc
 #'
 #' @exportClass nullModel
-setClass("nullModel", slots = c(formula = "formula", data = "data.frame", float = "logical", ptr = "externalptr"))
+setClass("nullModel", slots = c(formula = "formula", data = "data.frame", float = "logical", ids = "character", ptr = "externalptr"))
 
 setMethod("show", "nullModel", function(object) {
             cat("An object of class nullModel, corresponding to\n")
@@ -13,6 +13,7 @@ setMethod("show", "nullModel", function(object) {
 # avant de tout passer à la fonction Cpp on décale tous les indices de 1 -> utilisables tels quels en C++ 
 nullModel <- function(...) {
   L <- list(...)
+  ids <- as.character(L$id)
   L$id <- shift1(L$id)
   L$ev.index <- shift1(L$ev.index)
   L$events <- shift1(L$events)
@@ -23,7 +24,7 @@ nullModel <- function(...) {
     ptr <- mk_nullObject_float(L)
   else
     ptr <- mk_nullObject_double(L)
-  new("nullModel", formula = L$formula, data = L$data, float = float, ptr = ptr)
+  new("nullModel", formula = L$formula, data = L$data, float = float, ids = ids, ptr = ptr)
 }
 
 shift1 <- function(x) as.integer(x) - 1L

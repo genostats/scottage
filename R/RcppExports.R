@@ -5,6 +5,14 @@ get_nullObject <- function(nm) {
     .Call(`_scottage_get_nullObject`, nm)
 }
 
+GWAS_score_test_AG_bed_float <- function(pA, p, times, beg, end, nm) {
+    .Call(`_scottage_GWAS_score_test_AG_bed_float`, pA, p, times, beg, end, nm)
+}
+
+GWAS_score_test_AG_bed_double <- function(pA, p, times, beg, end, nm) {
+    .Call(`_scottage_GWAS_score_test_AG_bed_double`, pA, p, times, beg, end, nm)
+}
+
 mk_nullObject_float <- function(null_model) {
     .Call(`_scottage_mk_nullObject_float`, null_model)
 }
