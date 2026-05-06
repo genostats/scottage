@@ -28,8 +28,13 @@ struct nullObject {
   std::vector<unsigned int> events;
   std::vector<std::vector<unsigned int>> L_times;
   std::vector<std::vector<unsigned int>> L_events;
-  
-  size_t size() { return start.size(); }
+ 
+  // possibility to add a correlation matrix
+  MATRIX<scalar_t> C;
+
+  size_t size() { 
+    return start.size(); 
+  }
 };
 
 

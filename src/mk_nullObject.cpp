@@ -24,6 +24,10 @@ Rcpp::XPtr<nullObject<scalar_t>> mk_nullObject(Rcpp::List null_model) {
   pno->L_times = Rcpp::as<std::vector<std::vector<unsigned int>>>(null_model["L.times"]);
   pno->L_events = Rcpp::as<std::vector<std::vector<unsigned int>>>(null_model["L.events"]);
 
+  // is there a corrrelation matrix?
+  if(null_model.containsElementNamed("C")) 
+    pno->C = Rcpp::as<Eigen::Matrix<scalar_t, Eigen::Dynamic, Eigen::Dynamic>>(null_model["C"]);
+
   Rcpp::XPtr<nullObject<scalar_t>> res(pno);
   return res; 
 }
