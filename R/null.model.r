@@ -2,9 +2,10 @@
 #'
 #' @param formula a formula, whose response is a survival object (a call to the 'Surv' function)
 #' @param data a data frame
+#' @param C a correlation matrix
 #'
 #' @export
-null.model <- function(formula, data) {
+null.model <- function(formula, data, C) {
   # fit du modele
   fit <- survival::coxph(formula, ties = "breslow", data = data)
   
@@ -93,13 +94,21 @@ null.model <- function(formula, data) {
       S0[ L.times[[jk]] ] <- S0[ L.times[[jk]] ] + 1
     }
     # et c'est fini pour ce cas
-    return(nullModel(formula = formula, data = data, start = start, stop = stop, 
-                     status = status, id = id, ev.times = T, ev.index = S, 
-                     S0 = S0, exp.beta.Z = matrix(1, ncol = 1, nrow = n), 
-                     W = matrix(0, nrow = 0, ncol = length(unique(id))), 
-                     inverse.variance = matrix(0, nrow = 0, ncol = 0), 
-                     events = events, L.times = L.times, L.events = L.events))
-  }
+    if(missing(C)) 
+      return(nullModel(formula = formula, data = data, start = start, stop = stop, 
+                       status = status, id = id, ev.times = T, ev.index = S, 
+                       S0 = S0, exp.beta.Z = matrix(1, ncol = 1, nrow = n), 
+                       W = matrix(0, nrow = 0, ncol = length(unique(id))), 
+                       inverse.variance = matrix(0, nrow = 0, ncol = 0), 
+                       events = events, L.times = L.times, L.events = L.events))
+    else
+      return(nullModel(formula = formula, data = data, start = start, stop = stop, 
+                       status = status, id = id, ev.times = T, ev.index = S, 
+                       S0 = S0, exp.beta.Z = matrix(1, ncol = 1, nrow = n), 
+                       W = matrix(0, nrow = 0, ncol = length(unique(id))), 
+                       inverse.variance = matrix(0, nrow = 0, ncol = 0), 
+                       events = events, L.times = L.times, L.events = L.events, C = C))
+   }
   
   exp.beta.Z <- exp(as.numeric(Z %*% beta))
   Z.exp.beta.Z <- Z * exp.beta.Z
@@ -138,10 +147,10 @@ null.model <- function(formula, data) {
   
   # et voila la matrice de variance robuste
   Vkk <- tcrossprod(W)
-  
+
   nullModel(formula = formula, data = data, start = start, stop = stop, 
-            status = status, id = id, ev.times = T, ev.index = S, 
-            S0 = S0, exp.beta.Z = exp.beta.Z, W = W, inverse.variance = solve(Vkk),
-            events = events, L.times = L.times, L.events = L.events)
+              status = status, id = id, ev.times = T, ev.index = S, 
+              S0 = S0, exp.beta.Z = exp.beta.Z, W = W, inverse.variance = solve(Vkk),
+              events = events, L.times = L.times, L.events = L.events)
 }
 

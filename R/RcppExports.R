@@ -13,6 +13,14 @@ GWAS_score_test_AG_bed_double <- function(pA, p, times, beg, end, nm) {
     .Call(`_scottage_GWAS_score_test_AG_bed_double`, pA, p, times, beg, end, nm)
 }
 
+GWAS_score_test_AG_bed_float_TEST <- function(pA, p, times, beg, end, nm) {
+    .Call(`_scottage_GWAS_score_test_AG_bed_float_TEST`, pA, p, times, beg, end, nm)
+}
+
+GWAS_score_test_AG_bed_double_TEST <- function(pA, p, times, beg, end, nm) {
+    .Call(`_scottage_GWAS_score_test_AG_bed_double_TEST`, pA, p, times, beg, end, nm)
+}
+
 mk_nullObject_float <- function(null_model) {
     .Call(`_scottage_mk_nullObject_float`, null_model)
 }
@@ -27,5 +35,13 @@ score_test_float <- function(nm, X) {
 
 score_test_double <- function(nm, X) {
     .Call(`_scottage_score_test_double`, nm, X)
+}
+
+score_test_float_TEST <- function(nm, X) {
+    .Call(`_scottage_score_test_float_TEST`, nm, X)
+}
+
+score_test_double_TEST <- function(nm, X) {
+    .Call(`_scottage_score_test_double_TEST`, nm, X)
 }
 

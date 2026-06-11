@@ -3,15 +3,17 @@
 #include "nullObject.h"
 #include "mean_vector.h"
 
-#ifndef _scottage_core_test_AG_
-#define _scottage_core_test_AG_
+// pour tester l'idée de mettre une matrice de covariance génétique
+
+#ifndef _scottage_core_test_AG_TEST
+#define _scottage_core_test_AG_TEST
 
 template<typename scalar_t, typename vector>
-scalar_t score_test_AG(nullObject<scalar_t> * nm, vector & X, scalar_t mean_X = std::numeric_limits<scalar_t>::quiet_NaN()) {
+scalar_t score_test_AG_TEST(nullObject<scalar_t> * nm, vector & X, scalar_t mean_X = std::numeric_limits<scalar_t>::quiet_NaN()) {
   int m = nm->T.size();
   int n = nm->start.size();
   int nb_cluster = nm->W.cols();
-
+ 
   if(X.size() != n) throw std::runtime_error("length(X) is not ok");
   
   // calcul de S1_gamma[jk] (une valeur par ligne dans les données)
@@ -58,17 +60,20 @@ scalar_t score_test_AG(nullObject<scalar_t> * nm, vector & X, scalar_t mean_X = 
   }
 
   // le score est la somme des Wg
-  // et sa variance estimée la somme des Wg^2
   scalar_t score = 0;
   scalar_t Vgg = 0;
 
   for(scalar_t x : Wg) {
     score += x;
-    Vgg += x*x;
   }
 
-  Eigen::Matrix<scalar_t, Eigen::Dynamic, 1> Vkg = (nm->W) * (Wg);
-  scalar_t variance = Vgg - (Vkg.transpose() * (nm->Vkk_i) * Vkg)(0,0);
+  // variance qui tient compte de la correlation C
+  Vgg = Wg.dot((nm->C).template selfadjointView<Eigen::Lower>() * Wg);  // Wg' C Wg
+
+  // !!!! pour le moment pas de covariables !!!!!
+  // Eigen::Matrix<scalar_t, Eigen::Dynamic, 1> Vkg = (nm->W) * (Wg);
+  // scalar_t variance = Vgg - (Vkg.transpose() * (nm->Vkk_i) * Vkg)(0,0);
+  scalar_t variance = Vgg;
 
   return(score*score/variance);
 }

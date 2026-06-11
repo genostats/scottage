@@ -4,12 +4,14 @@
 \alias{null.model}
 \title{Creates null model object}
 \usage{
-null.model(formula, data)
+null.model(formula, data, C)
 }
 \arguments{
 \item{formula}{a formula, whose response is a survival object (a call to the 'Surv' function)}
 
 \item{data}{a data frame}
+
+\item{C}{a correlation matrix}
 }
 \description{
 Creates null model object

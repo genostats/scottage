@@ -55,6 +55,38 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// GWAS_score_test_AG_bed_float_TEST
+List GWAS_score_test_AG_bed_float_TEST(XPtr<matrix4> pA, NumericVector p, IntegerVector times, int beg, int end, Rcpp::XPtr<nullObject<float>> nm);
+RcppExport SEXP _scottage_GWAS_score_test_AG_bed_float_TEST(SEXP pASEXP, SEXP pSEXP, SEXP timesSEXP, SEXP begSEXP, SEXP endSEXP, SEXP nmSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtr<matrix4> >::type pA(pASEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type p(pSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type times(timesSEXP);
+    Rcpp::traits::input_parameter< int >::type beg(begSEXP);
+    Rcpp::traits::input_parameter< int >::type end(endSEXP);
+    Rcpp::traits::input_parameter< Rcpp::XPtr<nullObject<float>> >::type nm(nmSEXP);
+    rcpp_result_gen = Rcpp::wrap(GWAS_score_test_AG_bed_float_TEST(pA, p, times, beg, end, nm));
+    return rcpp_result_gen;
+END_RCPP
+}
+// GWAS_score_test_AG_bed_double_TEST
+List GWAS_score_test_AG_bed_double_TEST(XPtr<matrix4> pA, NumericVector p, IntegerVector times, int beg, int end, Rcpp::XPtr<nullObject<double>> nm);
+RcppExport SEXP _scottage_GWAS_score_test_AG_bed_double_TEST(SEXP pASEXP, SEXP pSEXP, SEXP timesSEXP, SEXP begSEXP, SEXP endSEXP, SEXP nmSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtr<matrix4> >::type pA(pASEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type p(pSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type times(timesSEXP);
+    Rcpp::traits::input_parameter< int >::type beg(begSEXP);
+    Rcpp::traits::input_parameter< int >::type end(endSEXP);
+    Rcpp::traits::input_parameter< Rcpp::XPtr<nullObject<double>> >::type nm(nmSEXP);
+    rcpp_result_gen = Rcpp::wrap(GWAS_score_test_AG_bed_double_TEST(pA, p, times, beg, end, nm));
+    return rcpp_result_gen;
+END_RCPP
+}
 // mk_nullObject_float
 Rcpp::XPtr<nullObject<float>> mk_nullObject_float(Rcpp::List null_model);
 RcppExport SEXP _scottage_mk_nullObject_float(SEXP null_modelSEXP) {
@@ -101,15 +133,43 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// score_test_float_TEST
+float score_test_float_TEST(Rcpp::XPtr<nullObject<float>> nm, Rcpp::NumericVector X);
+RcppExport SEXP _scottage_score_test_float_TEST(SEXP nmSEXP, SEXP XSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<nullObject<float>> >::type nm(nmSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type X(XSEXP);
+    rcpp_result_gen = Rcpp::wrap(score_test_float_TEST(nm, X));
+    return rcpp_result_gen;
+END_RCPP
+}
+// score_test_double_TEST
+double score_test_double_TEST(Rcpp::XPtr<nullObject<double>> nm, Rcpp::NumericVector X);
+RcppExport SEXP _scottage_score_test_double_TEST(SEXP nmSEXP, SEXP XSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<nullObject<double>> >::type nm(nmSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type X(XSEXP);
+    rcpp_result_gen = Rcpp::wrap(score_test_double_TEST(nm, X));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_scottage_get_nullObject", (DL_FUNC) &_scottage_get_nullObject, 1},
     {"_scottage_GWAS_score_test_AG_bed_float", (DL_FUNC) &_scottage_GWAS_score_test_AG_bed_float, 6},
     {"_scottage_GWAS_score_test_AG_bed_double", (DL_FUNC) &_scottage_GWAS_score_test_AG_bed_double, 6},
+    {"_scottage_GWAS_score_test_AG_bed_float_TEST", (DL_FUNC) &_scottage_GWAS_score_test_AG_bed_float_TEST, 6},
+    {"_scottage_GWAS_score_test_AG_bed_double_TEST", (DL_FUNC) &_scottage_GWAS_score_test_AG_bed_double_TEST, 6},
     {"_scottage_mk_nullObject_float", (DL_FUNC) &_scottage_mk_nullObject_float, 1},
     {"_scottage_mk_nullObject_double", (DL_FUNC) &_scottage_mk_nullObject_double, 1},
     {"_scottage_score_test_float", (DL_FUNC) &_scottage_score_test_float, 2},
     {"_scottage_score_test_double", (DL_FUNC) &_scottage_score_test_double, 2},
+    {"_scottage_score_test_float_TEST", (DL_FUNC) &_scottage_score_test_float_TEST, 2},
+    {"_scottage_score_test_double_TEST", (DL_FUNC) &_scottage_score_test_double_TEST, 2},
     {NULL, NULL, 0}
 };
 
